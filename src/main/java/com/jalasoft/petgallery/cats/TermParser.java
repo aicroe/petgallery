@@ -38,9 +38,7 @@ public class TermParser {
             Field field = object.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
             return String.valueOf(field.get(object)).equals(String.valueOf(value));
-        } catch (NoSuchFieldException e) {
-            return false;
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
             return false;
         }

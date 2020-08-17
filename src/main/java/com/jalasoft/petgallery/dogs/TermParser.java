@@ -11,7 +11,8 @@ public class TermParser {
     public String parse(Term term) {
         if (term.hasValue()) {
             Pair pair = term.getValue();
-            return String.format("d.%s = '%s'", pair.getKey(), pair.getValue());
+            String comparator = term.is(TermType.VALUE) ? "=" : "!=";
+            return String.format("d.%s %s '%s'", pair.getKey(), comparator, pair.getValue());
         } else if (term.is(TermType.OR)) {
             return term.getChildren().stream()
                 .map(this::parse)
